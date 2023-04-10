@@ -1,9 +1,10 @@
 import argparse
 import random
 
-def eval_function(red, blue):
+def evaluate_function(red, blue):
     """
     This function returns the evaluation of the current state of the game based on the number of red and blue marbles left.
+    extra credit evaluate_function
     """
     return 2 * red + 3 * blue
 
@@ -12,10 +13,11 @@ def minimax(red, blue, depth, is_max_turn, alpha, beta, memo):
     state = (red, blue, depth, is_max_turn)
     if state in memo:
         return memo[state]
+    
 
     #this part is for performing depth limited mini max with alpha beta prunning.
     if red == 0 or blue == 0:
-        value = eval_function(red, blue)
+        value = evaluate_function(red, blue)
     elif depth == 0:
         value = 0
     elif is_max_turn:
@@ -86,12 +88,12 @@ def human_m(red, blue):
     return red, blue
 
 
-def p_g(red, blue, depth, first_player):
+def p_g(red, blue, depth, f_p):
     """
     Starting a game of Red-Blue Nim.
     """
-    print("Starting game with red={}, blue={}, first_player={}, depth={}".format(red, blue, first_player, depth))
-    if first_player == "human":
+    print("Starting game with red={}, blue={}, first_player={}, depth={}".format(red, blue, f_p, depth))
+    if f_p == "human":
         turn = 0
     else:
         turn = 1
