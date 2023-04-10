@@ -13,7 +13,7 @@ def minimax(red, blue, depth, is_max_turn, alpha, beta, memo):
     if state in memo:
         return memo[state]
 
-    # Perform a depth-limited MinMax search with alpha-beta pruning to determine the best move for the computer player.
+    #this part is for performing depth limited mini max with alpha beta prunning.
     if red == 0 or blue == 0:
         value = eval_function(red, blue)
     elif depth == 0:
@@ -45,7 +45,7 @@ def minimax(red, blue, depth, is_max_turn, alpha, beta, memo):
     memo[state] = value
     return value
 
-def computer_move(red, blue, depth, memo={}):
+def computer_m(red, blue, depth, memo={}):
     # Determine the best move for the computer player using the MinMax algorithm with alpha-beta pruning and memoization.
     state = (red, blue, depth)
     if state in memo:
@@ -72,7 +72,7 @@ def computer_move(red, blue, depth, memo={}):
     memo[state] = (red, blue)
     return red, blue
 
-def human_move(red, blue):
+def human_m(red, blue):
     """
     Prompt the human player for their move and perform it.
     """
@@ -86,9 +86,9 @@ def human_move(red, blue):
     return red, blue
 
 
-def play_game(red, blue, depth, first_player):
+def p_g(red, blue, depth, first_player):
     """
-    Starts a game of Red-Blue Nim.
+    Starting a game of Red-Blue Nim.
     """
     print("Starting game with red={}, blue={}, first_player={}, depth={}".format(red, blue, first_player, depth))
     if first_player == "human":
@@ -97,9 +97,9 @@ def play_game(red, blue, depth, first_player):
         turn = 1
     while red > 0 and blue > 0:
         if turn % 2 == 0:
-            red, blue = human_move(red, blue)
+            red, blue = human_m(red, blue)
         else:
-            red, blue = computer_move(red, blue, depth)
+            red, blue = computer_m(red, blue, depth)
         print("Current state: red = {}, blue = {}".format(red, blue))
         turn += 1
     if red == 0:
@@ -122,10 +122,10 @@ def main():
     red = args.red
     blue = args.blue
     depth = args.depth
-    first_player = args.firstplayer
+    f_p = args.firstplayer
 
     # Start the game with the specified settings.
-    play_game(red, blue, depth, first_player)
+    p_g(red, blue, depth, f_p)
 
 
 if __name__ == "__main__":
